@@ -5,6 +5,6 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:      mysql:host=localhost;dbname=jobeet
+      dsn:      mysql:host=localhost;dbname=test
       username: root
       password: 
