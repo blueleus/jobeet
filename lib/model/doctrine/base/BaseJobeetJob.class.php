@@ -68,6 +68,7 @@ abstract class BaseJobeetJob extends sfDoctrineRecord
              ));
         $this->hasColumn('type', 'string', 255, array(
              'type' => 'string',
+             'default' => 'full-time',
              'length' => 255,
              ));
         $this->hasColumn('company', 'string', 255, array(

@@ -14,11 +14,43 @@ class JobeetCategory extends BaseJobeetCategory
 {
   public function getActiveJobs($max = 10)
   {
-    $q = Doctrine_Query::create()
-      ->from('JobeetJob j')
-      ->where('j.category_id = ?', $this->getId())
+    $q = $this->getActiveJobsQuery()
       ->limit($max);
    
-    return Doctrine_Core::getTable('JobeetJob')->getActiveJobs($q);
+    return $q->execute();
+  }
+
+  /**
+   * Un ruta puede usar cualquier columna de su objeto asociado como parámetro. 
+   * También puede usa cualquier otro valor si hay un método asociado definido 
+   * en la clase del objeto. Debido a que el parámetro slug no tiene una columna
+   * correspondiente en la tabla category, necesitamos agregar un método de 
+   * acceso virtual en JobeetCategory para que la ruta funcione.
+   * @return [String] [category name]
+   */
+  // slug es una columna real en la tabla JobeetCategory, es necesario eliminar 
+  // el método getSlug()
+  // public function getSlug()
+  // {
+  //   return Jobeet::slugify($this->getName());
+  // }
+
+  public function countActiveJobs()
+  {
+    return $this->getActiveJobsQuery()->count();
+  }
+
+  /**
+   * El método sfDoctrinePager::setQuery() toma un objeto Doctrine_Query para 
+   * utilizarlo a la hora de seleccionar los elementos de la base de datos.
+   * @return [Doctrine_Query] [Doctrine_Query]
+   */
+  public function getActiveJobsQuery()
+  {
+    $q = Doctrine_Query::create()
+      ->from('JobeetJob j')
+      ->where('j.category_id = ?', $this->getId());
+   
+    return Doctrine_Core::getTable('JobeetJob')->addActiveJobsQuery($q);
   }
 }

@@ -18,7 +18,8 @@
         <div class="content">
           <h1>
             <a href="<?php echo url_for('@homepage') ?>">
-              <img src="/legacy/images/jobeet.gif" alt="Jobeet Job Board" />
+              <!-- <img src="/legacy/images/jobeet.gif" alt="Jobeet Job Board" /> -->
+              <?php echo image_tag('jobeet.gif', array('alt' => 'Jobeet Job Board')) ?>
             </a>
           </h1>
  
@@ -26,7 +27,7 @@
             <div class="post">
               <h2>Ask for people</h2>
               <div>
-                <a href="<?php echo url_for('job/index') ?>">Post a Job</a>
+                <a href="<?php echo url_for('@job_new') ?>">Post a Job</a>
               </div>
             </div>
  
@@ -66,9 +67,11 @@
       <div id="footer">
         <div class="content">
           <span class="symfony">
-            <img src="/legacy/images/jobeet-mini.png" />
+            <!-- <img src="/legacy/images/jobeet-mini.png" /> -->
+            <?php echo image_tag('jobeet-mini.png') ?>
             powered by <a href="/">
-            <img src="/legacy/images/symfony.gif" alt="symfony framework" />
+            <!-- <img src="/legacy/images/symfony.gif" alt="symfony framework" /> -->
+            <?php echo image_tag('symfony.gif', array('alt' => 'symfony framework')) ?>
             </a>
           </span>
           <ul>
